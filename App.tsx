@@ -18,7 +18,11 @@ import OrderManagementIcon from './src/assets/navbar/OrderManagement.svg';
 import SignIn from './src/components/Auth/SignIn';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomBarProvider, useBottomBar } from './contexts/BottomBarContext';
-import { LoginContext, LoginProvider, UserProvider } from './src/common/Context';
+import {
+  LoginContext,
+  LoginProvider,
+  UserProvider,
+} from './src/common/Context';
 import SplashScreen from './src/common/SplashScreen';
 
 import { getUserRole } from './src/common/storage';
@@ -148,13 +152,14 @@ const MainTabNavigator = () => {
       screenOptions={{ headerShown: false }}>
       <Tab.Screen name="UPCY" component={HomeScreen} />
       {isLogin && userInfo === 'reformer' && (
-        <Tab.Screen name="주문관리" component={OrderManagement} />
+        <Tab.Screen name="주문관리">
+          {props => <OrderManagement {...props} />}
+        </Tab.Screen>
       )}
       <Tab.Screen name="MY" component={MyPageScreen} />
     </Tab.Navigator>
   );
 };
-
 
 function App(): React.JSX.Element {
   const [isSplashFinished, setIsSplashFinished] = useState(false);
@@ -185,6 +190,5 @@ function App(): React.JSX.Element {
     </BottomBarProvider>
   );
 }
-
 
 export default App;

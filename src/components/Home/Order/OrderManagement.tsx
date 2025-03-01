@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, FlatList, } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import DetailScreenHeader from '../components/DetailScreenHeader.tsx';
@@ -37,8 +37,8 @@ export type OrderProps = {
   navigation: any;
   route: any;
   flatListRef?: React.RefObject<FlatList<any>>;
-  QuotationReview: {order:any};
-}
+  QuotationReview: { order: any };
+};
 
 export type OrderStackParams = {
   OrderManagementTabs: undefined;
@@ -56,7 +56,7 @@ export type OrderStackParams = {
   Rejection: undefined;
   SentRejection: undefined;
   QuotationReview: QuotationProps;
-}
+};
 
 const OrderStack = createStackNavigator<OrderStackParams>();
 
@@ -76,10 +76,7 @@ const OrderStack = createStackNavigator<OrderStackParams>();
 //   )
 // }
 
-const OrderManagement = ({
-  // navigation, route
-}: BottomTabScreenProps<TabProps, '주문관리'>) => {
-
+const OrderManagement = ({ navigation }: { navigation: any }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f0f0f0' }}>
       <OrderStack.Navigator
@@ -95,9 +92,9 @@ const OrderManagement = ({
               <DetailScreenHeader
                 title="주문 관리"
                 leftButton="CustomBack"
-                onPressLeft={() => { }}
+                onPressLeft={() => {}}
                 rightButton="None"
-                onPressRight={() => { }}
+                onPressRight={() => {}}
               />
             ),
           }}
@@ -105,18 +102,28 @@ const OrderManagement = ({
         <OrderStack.Screen name="QuotationPage" component={QuotationPage} />
         <OrderStack.Screen name="QuotationForm" component={QuotationForm} />
         <OrderStack.Screen name="NewOrders" component={NewOrders} />
-        <OrderStack.Screen name="InProgressOrders" component={InProgressOrders} />
+        <OrderStack.Screen
+          name="InProgressOrders"
+          component={InProgressOrders}
+        />
         <OrderStack.Screen name="OrderPage" component={OrderPage} />
-        <OrderStack.Screen name="CompletedOrderPop" component={CompletedOrderPop} />
+        <OrderStack.Screen
+          name="CompletedOrderPop"
+          component={CompletedOrderPop}
+        />
         <OrderStack.Screen name="CompletedOrders" component={CompletedOrders} />
         <OrderStack.Screen name="SentQuotation" component={SentQuotation} />
         <OrderStack.Screen name="WriteReviewPage" component={WriteReviewPage} />
         <OrderStack.Screen name="InputInfo" component={InputInfo} />
-        <OrderStack.Screen name="QuotationConfirm" component={QuotationConfirm} />
+        <OrderStack.Screen
+          name="QuotationConfirm"
+          component={QuotationConfirm}
+        />
         <OrderStack.Screen name="Rejection" component={Rejection} />
-        <OrderStack.Screen name="SentRejection" component={SentRejection} />
+        <OrderStack.Screen name="SentRejection">
+          {navigation => <SentRejection {...navigation} />}
+        </OrderStack.Screen>
         <OrderStack.Screen name="QuotationReview" component={QuotationReview} />
-
       </OrderStack.Navigator>
     </SafeAreaView>
   );
