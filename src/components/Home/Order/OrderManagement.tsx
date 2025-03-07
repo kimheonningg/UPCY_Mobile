@@ -52,7 +52,7 @@ export type OrderStackParams = {
   SentQuotation: undefined;
   WriteReviewPage: undefined;
   InputInfo: InputInfoProps;
-  QuotationConfirm: undefined;
+  QuotationConfirm: QuotationProps;
   Rejection: undefined;
   SentRejection: undefined;
   QuotationReview: QuotationProps;
